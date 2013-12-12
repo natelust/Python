@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+PYTHON="${PYTHON:-python}"
+
+# check if $PYTHON executable exists
+if hash "$PYTHON" 2>/dev/null; then
+	PYTHON_VERSION=$(python -c 'import sys; print "%d.%d" % (sys.version_info[0], sys.version_info[1])')
+	if [[ "$PYTHON_VERSION" != "2.7" ]]; then
+		echo "check-python: Python v2.7 not found (version reported by '$PYTHON' is $PYTHON_VERSION)." 2>&1
+		echo "check-python: point PYTHON envvar to a compatible version and try again." 2>&1
+		exit -1
+	fi
+else
+	echo "check-python: no python executable detected (looked for '$PYTHON'; default can be overridden by setting PYTHON envvar)." 2>&1
+	exit -1
+fi
+
+echo "Using externally provided $($PYTHON -V 2>&1)."
+# echo "Located in $(which $PYTHON)"
+
+exit 0
