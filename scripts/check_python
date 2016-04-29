@@ -7,7 +7,7 @@ PYTHON="${PYTHON:-python}"
 # Check if a supported $PYTHON executable exists
 # Eligible versions are listed at # https://confluence.lsstcorp.org/display/LSWUG/_PythonVersionSupport
 if hash "$PYTHON" 2>/dev/null; then
-	PYTHON_VERSION=$(python -c 'import sys; print "%d.%d" % (sys.version_info[0], sys.version_info[1])')
+	PYTHON_VERSION=$($PYTHON -c 'import sys; print("%d.%d" % (sys.version_info[0], sys.version_info[1]))')
 	if [[ "$PYTHON_VERSION" != "2.7" ]]; then
 		echo "check-python: Python v2.7 not found (version reported by '$PYTHON' is $PYTHON_VERSION)." 2>&1
 		echo "check-python: point PYTHON envvar to a compatible version and try again." 2>&1
