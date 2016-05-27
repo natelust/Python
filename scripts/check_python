@@ -2,23 +2,26 @@
 
 set -e
 
-PYTHON="${PYTHON:-python}"
+# Check the version of python at the front of $PATH
+PYTHON="python"
 
 # Check if a supported $PYTHON executable exists
 # Eligible versions are listed at # https://confluence.lsstcorp.org/display/LSWUG/_PythonVersionSupport
 if hash "$PYTHON" 2>/dev/null; then
-	PYTHON_VERSION=$(python -c 'import sys; print "%d.%d" % (sys.version_info[0], sys.version_info[1])')
+	# Use full path from now on as it makes messages clearer
+	PYTHON=$(which $PYTHON)
+	PYTHON_VERSION=$($PYTHON -c 'import sys; print("%d.%d" % (sys.version_info[0], sys.version_info[1]))')
 	if [[ "$PYTHON_VERSION" != "2.7" ]]; then
 		echo "check-python: Python v2.7 not found (version reported by '$PYTHON' is $PYTHON_VERSION)." 2>&1
-		echo "check-python: point PYTHON envvar to a compatible version and try again." 2>&1
+		echo "check-python: Please ensure a compatible python is at the front of your PATH." 2>&1
 		exit -1
 	fi
 else
-	echo "check-python: no python executable detected (looked for '$PYTHON'; default can be overridden by setting PYTHON envvar)." 2>&1
+	echo "check-python: no python executable detected (looked for '$PYTHON')." 2>&1
 	exit -1
 fi
 
-echo "Using externally provided $($PYTHON -V 2>&1)."
+echo "Using $PYTHON ($($PYTHON -V 2>&1))."
 # echo "Located in $(which $PYTHON)"
 
 exit 0
