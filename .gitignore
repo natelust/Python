@@ -1,2 +1,4 @@
 *~
 _eupspkg
+_build.*
+*.cfgc
