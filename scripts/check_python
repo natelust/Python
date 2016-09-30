@@ -9,8 +9,8 @@ if hash python 2>/dev/null; then
 	python -c 'import sys
 minver2=7
 minver3=5
-vmaj = sys.version_info.major
-vmin = sys.version_info.minor
+vmaj = sys.version_info[0]
+vmin = sys.version_info[1]
 if (vmaj == 2 and vmin >= minver2) or (vmaj == 3 and vmin >= minver3):
     exit(0)
 print("""check-python: Python2 >= {} or Python3 >= {} not found (version reported by '{}' is '{}').
