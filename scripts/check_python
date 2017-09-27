@@ -3,7 +3,7 @@
 set -e
 
 # Check if a supported python executable exists
-# Eligible versions are listed at # https://confluence.lsstcorp.org/display/LSWUG/_PythonVersionSupport
+# Eligible versions are listed at # https://developer.lsst.io/coding/python_style_guide.html#python-version
 if hash python 2>/dev/null; then
 	# Check the version by running a small Python program
 	python -c 'import sys
