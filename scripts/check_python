@@ -3,12 +3,12 @@
 set -e
 
 # Check if a supported python executable exists
-# Eligible versions are listed at # https://confluence.lsstcorp.org/display/LSWUG/_PythonVersionSupport
+# Eligible versions are listed at # https://developer.lsst.io/coding/python_style_guide.html#python-version
 if hash python 2>/dev/null; then
 	# Check the version by running a small Python program
 	python -c 'import sys
 minver2=7
-minver3=5
+minver3=6
 vmaj = sys.version_info[0]
 vmin = sys.version_info[1]
 if (vmaj == 2 and vmin >= minver2) or (vmaj == 3 and vmin >= minver3):
