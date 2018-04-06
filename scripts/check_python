@@ -6,7 +6,7 @@ set -e
 # Eligible versions are listed at # https://developer.lsst.io/coding/python_style_guide.html#python-version
 if hash python 2>/dev/null; then
 	# Check the version by running a small Python program
-	python -c 'import sys
+	if ! python -c 'import sys
 minver2=7
 minver3=6
 vmaj = sys.version_info[0]
@@ -17,8 +17,7 @@ print("""check-python: Python2 >= {} or Python3 >= {} not found (version reporte
 check-python: Please ensure a compatible python is at the front of your PATH.""".format(minver2, minver3,
                                                                                         sys.executable,
                                                                                         sys.version))
-exit(-1)'
-	if [ "$?" -ne 0 ]; then
+exit(-1)'; then
 		exit -1
 	fi
 else

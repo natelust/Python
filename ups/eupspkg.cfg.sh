@@ -1,3 +1,5 @@
+#!/bin/bash
+
 config()
 {
 	# Verify that a compatible module can be found exists
