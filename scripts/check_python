@@ -5,16 +5,16 @@ set -e
 # Check if a supported python executable exists
 # Eligible versions are listed at # https://developer.lsst.io/coding/python_style_guide.html#python-version
 if hash python 2>/dev/null; then
-	# Check the version by running a small Python program
+	# Check the version by running a small Python program that has to be
+	# maximally compatible
 	if ! python -c 'import sys
-minver2=7
-minver3=6
+minver3=7
 vmaj = sys.version_info[0]
 vmin = sys.version_info[1]
-if (vmaj == 2 and vmin >= minver2) or (vmaj == 3 and vmin >= minver3):
+if (vmaj == 3 and vmin >= minver3):
     exit(0)
-print("""check-python: Python2 >= {} or Python3 >= {} not found (version reported by '{}' is '{}').
-check-python: Please ensure a compatible python is at the front of your PATH.""".format(minver2, minver3,
+print("""check-python: Python >= 3.{} not found (version reported by '{}' is '{}').
+check-python: Please ensure a compatible python is at the front of your PATH.""".format(minver3,
                                                                                         sys.executable,
                                                                                         sys.version))
 exit(-1)'; then
